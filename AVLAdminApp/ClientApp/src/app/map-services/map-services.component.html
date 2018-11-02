@@ -1,0 +1,40 @@
+<!--<select [(ngModel)]="dboUser.accessLevel" class="form-control" type="text" name="{{dboUser.accessLevel}}">
+  <option value="1">Administrator</option>
+  <option value="2">User</option>
+</select>-->
+
+<div style="margin: 5vw; width: 100%; display: inline-block">
+
+  <label for="selectService" class="h3">Select a service account</label>
+  <select [(ngModel)]="selectedServiceAccount" class="form-control" name="{{selectedServiceAccount}}" (change)="getLists()" id="selectService">
+    <option disabled selected> -- select an option -- </option>
+    <option *ngFor="let serviceAccount of serviceAccounts" [ngValue]="serviceAccount">{{serviceAccount.loginName}}</option>
+  </select>
+
+
+  <div class="SAlist">
+    <h3> Un-Associated Services</h3>
+    <ul>
+      <li *ngFor="let service of unassociatedServices"
+          (click)="select(service)"
+          [class.selected]="service === selectedService">
+          {{service.serviceName}}</li>
+    </ul>
+  </div>
+
+  <div style="float: left; margin-right: 5vw">
+    <button class="btn btn-lg btn-primary btn-block" (click)="addAccount()" style="font-size: 30px; margin-top: 10px"> &#xbb; </button>
+    <button class="btn btn-lg btn-primary btn-block" (click)="removeAccount()" style="font-size: 30px; margin-top: 10px"> &#xab; </button>
+  </div>
+
+  <div class="SAlist">
+    <h3> Associated Services</h3>
+    <ul>
+      <li *ngFor="let service of associatedServices"
+          (click)="select(service)"
+          [class.selected]="service === selectedService">
+          {{service.serviceName}}</li>
+    </ul>
+  </div>
+</div>
+<button id="save" class="btn btn-lg btn-primary btn-block" (click)="save()"> save </button>
